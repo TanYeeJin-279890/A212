@@ -1,0 +1,18 @@
+.title {
+    color: blueviolet;
+    text-shadow: 1px 1px 0 rgb(243, 52, 217);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+    color: black;
+    font-family: Arial;
+    font-size: 70%;
+}
+
+.left {
+    max-width: 500px;
+    margin: auto;
+    border: 10px solid white;
+}
+
