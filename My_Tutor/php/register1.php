@@ -1,9 +1,6 @@
 <?php
-
-
-include_once("dbconnect.php");
-
 if (isset($_POST['register'])) {
+    include_once("dbconnect.php");
 
     if (!(isset($_POST["name"]) || isset($_POST["email"]) || isset($_POST["phone"]) || isset($_POST["password"]) || isset($_POST["address"]))) {
         echo "<script> alert('Please fill in all required information')</script>";
@@ -24,7 +21,7 @@ if (isset($_POST['register'])) {
                 $conn->exec($sqlregister);
                 uploadImage($icno);
                 echo "<script>alert('Registration successful')</script>";
-                echo "<script>window.location.replace('login.html')</script>";
+                echo "<script>window.location.replace('../login.html')</script>";
             } catch (PDOException $e) {
                 echo "<script>alert('Registration failed')</script>";
                 echo "<script>window.location.replace('register1.php')</script>";
@@ -40,7 +37,7 @@ if (isset($_POST['register'])) {
             try {
                 $conn->exec($sqlregister);
                 echo "<script>alert('Registration successful')</script>";
-                echo "<script>window.location.replace('login.html')</script>";
+                echo "<script>window.location.replace('../login.html')</script>";
             } catch (PDOException $e) {
                 echo "<script>alert('Registration failed')</script>";
                 echo "<script>window.location.replace('register1.php')</script>";
@@ -67,7 +64,8 @@ function uploadImage($email)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="../js/function.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/w3.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Registration Page</title>
 
@@ -87,17 +85,19 @@ function uploadImage($email)
         /* Create two unequal columns that floats next to each other */
         .column {
             float: left;
-            padding: 10px;
+            padding: 5px;
             height: 300px;
+            
 
         }
 
         .left {
-            width: 30%;
+            width: 50%;
+            
         }
 
         .right {
-            width: 70%;
+            width: 50%;
 
         }
 
@@ -106,6 +106,7 @@ function uploadImage($email)
             content: "";
             display: table;
             clear: both;
+            
         }
     </style>
 </head>
@@ -113,77 +114,70 @@ function uploadImage($email)
 <body>
     <div class="header">
         <div style="color:white;text-align:center;">
-            <b>My Tutor Websites</b>
+            <h1><b>My Tutor Websites</b></h1>
         </div>
     </div>
 
-    <div class="w3-container w3-card w3-padding w3-margin">
-        <div class="w3-content w3-margin">
-            <div class="column left">
-                <img src="Capture.PNG" style="max-width: 115%; height:auto;"><br>
-                <input type="file" onchange="previewFile()" name="fileToUpload" id="fileToUpload"><br>
-            </div>
-
-            <div class="column right w3-padding-20" style="display:flex; justify-content: center">
-                <form style="margin: auto; width: 220px;" action="register1.php" method="post" enctype="multipart/form-data" onbutton="return confirmDialog()">
-                    <div class="w3-container w3-card w3-padding w3-margin" style="width:600px;margin:auto;text-align:left;">
-
-                        <h2 style="text-align:center;font-weight:bold;">Registration Form</h2>
-
-                        <div class="w3-container w3-center">
-                            <img class="imgselection" src="../user/res/image/userpic.png" style="width:30%"><br>
-                            <div>
-                                <h4>Upload your Profile Image</h4><br>
-                            </div>
-                            <input type="file" onchange="previewFile()" name="fileToUpload" id="fileToUpload"><br>
-                        </div>
-
-                        <div>
-                            <p>
-                                <label><b>Name</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="name" placeholder="Your Name" required>
-                            </p>
-
-                            <p>
-                                <label><b>Email</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="email" placeholder="Your Email Address" required>
-                            </p>
-
-                            <p>
-                                <label><b>Password</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="password" placeholder="Your Password" required>
-                            </p>
-
-                            <p>
-                                <label><b>Re-enter Password</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="repassword" placeholder="Your Password" required>
-                            </p>
-
-                            <p>
-                                <label><b>Phone</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="phone" placeholder="Your Phone No." required>
-                            </p>
-
-                            <p>
-                                <label><b>Address</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="address" placeholder="Your Home Address" required>
-                            </p>
-                            <br>
-                            <div class="row">
-                                <p style="text-align: center;">
-                                    <!-- <input type="button" class="w3-btn w3-red" value="Sign Up"> -->
-                                    <input class="w3-btn w3-red w3-round w3-padding-20" type="button" name="register" value="Register">
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-
+    <div class="w3-content">
+        <div class="column left">
+            <img src="../Capture.PNG" style="width:400px; height:auto;"><br>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <p style="text-align: right;">Jean(2022)</p>
+
+        <div class="column right w3-padding-30" style="display:flex; justify-content: center">
+            <form action="register1.php" method="post" enctype="multipart/form-data" onsubmit="return confirmDialog()">
+                <div class="w3-container w3-card w3-padding w3-margin" style="width:600px;margin:auto;text-align:left;">
+
+                    <h2 style="text-align:center;font-weight:bold;">Registration Form</h2>
+
+                    <div class="w3-container w3-center">
+                        <img class="imgselection" src="../res/image/userpic.png" style="width:30%"><br>
+                        <div>
+                            <h4>Upload your Profile Image</h4><br>
+                        </div>
+                        <input type="file" onchange="previewFile()" name="fileToUpload" id="fileToUpload"><br>
+                    </div>
+
+                    <div>
+                        <p>
+                            <label><b>Name</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="name" placeholder="Your Name" required>
+                        </p>
+
+                        <p>
+                            <label><b>Email</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="email" placeholder="Your Email Address" required>
+                        </p>
+
+                        <p>
+                            <label><b>Password</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="password" placeholder="Your Password" required>
+                        </p>
+
+                        <p>
+                            <label><b>Re-enter Password</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="repassword" placeholder="Your Password" required>
+                        </p>
+
+                        <p>
+                            <label><b>Phone</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="phone" placeholder="Your Phone No." required>
+                        </p>
+
+                        <p>
+                            <label><b>Address</b></label>
+                            <input class="w3-input w3-round w3-border" type="text" name="address" placeholder="Your Home Address" required>
+                        </p>
+                        <br>
+                        <div class="row">
+                            <p style="text-align: center;">
+                                <input class="w3-btn w3-red w3-round w3-padding-20" type="submit" name="register" value="Register">
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 
 
