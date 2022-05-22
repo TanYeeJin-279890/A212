@@ -33,7 +33,7 @@ if (isset($_POST['register'])) {
 
             $name = $_POST["name"];
             $address = $_POST["address"];
-            $citizenship = $_POST["password"];
+            $password = $_POST["password"];
             $email = $_POST["email"];
             $phone = $_POST["phone"];
             $sqlregister = "INSERT INTO `tbl_register`( `name`, `address`, `password`, `email`, `phone`) VALUES( '$name', '$address', '$password', '$email', '$phone')";
@@ -43,7 +43,7 @@ if (isset($_POST['register'])) {
                 echo "<script>window.location.replace('login.html')</script>";
             } catch (PDOException $e) {
                 echo "<script>alert('Registration failed')</script>";
-                echo "<script>window.location.replace('register.php')</script>";
+                echo "<script>window.location.replace('register1.php')</script>";
             }
         }
     }
@@ -52,7 +52,7 @@ if (isset($_POST['register'])) {
 
 function uploadImage($email)
 {
-    $target_dir = "My_Tutor/user/res/image/user/";
+    $target_dir = "../res/image/user/";
     $target_file = $target_dir . $email . ".png";
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 }
@@ -65,6 +65,7 @@ function uploadImage($email)
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="../js/function.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -74,7 +75,7 @@ function uploadImage($email)
     <style>
         body {
             background-color: LavenderBlush;
-            
+
         }
 
         .header {
@@ -97,7 +98,7 @@ function uploadImage($email)
 
         .right {
             width: 70%;
-           
+
         }
 
         /* Clear floats after the columns */
@@ -119,11 +120,12 @@ function uploadImage($email)
     <div class="w3-container w3-card w3-padding w3-margin">
         <div class="w3-content w3-margin">
             <div class="column left">
-                <img src="Capture.PNG" style="max-width: 115%; height:auto;">
+                <img src="Capture.PNG" style="max-width: 115%; height:auto;"><br>
+                <input type="file" onchange="previewFile()" name="fileToUpload" id="fileToUpload"><br>
             </div>
 
             <div class="column right w3-padding-20" style="display:flex; justify-content: center">
-                <form style="margin: auto; width: 220px;" action="register1.php" method="post" enctype="multipart/form-data" onsubmit="return confirm('Are you sure to register?')">
+                <form style="margin: auto; width: 220px;" action="register1.php" method="post" enctype="multipart/form-data" onbutton="return confirmDialog()">
                     <div class="w3-container w3-card w3-padding w3-margin" style="width:600px;margin:auto;text-align:left;">
 
                         <h2 style="text-align:center;font-weight:bold;">Registration Form</h2>
@@ -167,9 +169,12 @@ function uploadImage($email)
                                 <input class="w3-input w3-round w3-border" type="text" name="address" placeholder="Your Home Address" required>
                             </p>
                             <br>
-                            <p style="text-align: center;">
-                                <input class="w3-button w3-red w3-round w3-padding-20" type="register" name="register" value="Register">
-                            </p>
+                            <div class="row">
+                                <p style="text-align: center;">
+                                    <!-- <input type="button" class="w3-btn w3-red" value="Sign Up"> -->
+                                    <input class="w3-btn w3-red w3-round w3-padding-20" type="button" name="register" value="Register">
+                                </p>
+                            </div>
                         </div>
 
                     </div>
@@ -179,7 +184,7 @@ function uploadImage($email)
         </div>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <p style="text-align: right;">Jean(2022)</p>
- </div>
+    </div>
 
 
 </body>
