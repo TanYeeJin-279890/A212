@@ -3,55 +3,36 @@
 if (isset($_POST['register'])) {
     include_once("dbconnect.php");
 
-    if (!(isset($_POST["name"]) || isset($_POST["email"]) || isset($_POST["phone"]) || isset($_POST["password"]) || isset($_POST["address"]))) {
-        echo "<script> alert('Please fill in all informations')</script>";
-        echo "<script> window.location.replace('register1.php')</script>";
-    } else {
-        if (file_exists($_FILES["fileToUpload"]["tmp_name"]) || is_uploaded_file($_FILES["fileToUpload"]["tmp_name"])) {
+    if (file_exists($_FILES["fileToUpload"]["tmp_name"]) || is_uploaded_file($_FILES["fileToUpload"]["tmp_name"])) {
 
-            $name = $_POST["name"];
-            $address = $_POST["address"];
-            $password = sha1($_POST["password"]);
-            $email = $_POST["email"];
-            $phone = $_POST["phone"];
+        $id = $_POST['id'];
+        $name = $_POST["name"];
+        $address = $_POST["address"];
+        $password = sha1($_POST["password"]);
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
 
-            echo  "$name, $address, $password, $email,$phone";
+        echo  "$name, $address, $password, $email,$phone";
 
-            $sqlregister = "INSERT INTO `tbl_register`( `user_name`, `user_address`, `user_password`, `user_email`, `user_phone`) VALUES('$name', '$address', '$password', '$email', '$phone')";
-            try {
-                $conn->exec($sqlregister);
-                uploadImage($icno);
-                echo "<script>alert('Registration successful')</script>";
-                echo "<script>window.location.replace('../login.php')</script>";
-            } catch (PDOException $e) {
-                echo "<script>alert('Registration failed')</script>";
-                echo "<script>window.location.replace('register1.php')</script>";
-            }
-        } else {
-
-            $name = $_POST["name"];
-            $address = $_POST["address"];
-            $password = sha1($_POST["password"]);
-            $email = $_POST["email"];
-            $phone = $_POST["phone"];
-            $sqlregister = "INSERT INTO `tbl_register`( `name`, `address`, `password`, `email`, `phone`) VALUES( '$name', '$address', '$password', '$email', '$phone')";
-            try {
-                $conn->exec($sqlregister);
-                echo "<script>alert('Registration successful')</script>";
-                echo "<script>window.location.replace('../login.php')</script>";
-            } catch (PDOException $e) {
-                echo "<script>alert('Registration failed')</script>";
-                echo "<script>window.location.replace('register1.php')</script>";
-            }
+        $sqlregister = "INSERT INTO `tbl_register`( `user_id`,`user_name`, `user_address`, `user_password`, `user_email`, `user_phone`) VALUES('$id','$name', '$address', '$password', '$email', '$phone')";
+        try {
+            $conn->exec($sqlregister);
+            $last_id = $conn->lastInsertId();
+            uploadImage($last_id);
+            echo "<script>alert('Registration successful')</script>";
+            echo "<script>window.location.replace('../login.php')</script>";
+        } catch (PDOException $e) {
+            echo "<script>alert('Registration failed')</script>";
+            echo "<script>window.location.replace('register1.php')</script>";
         }
     }
 }
 
 
-function uploadImage($email)
+function uploadImage($id)
 {
     $target_dir = "../res/image/user/";
-    $target_file = $target_dir . $email . ".png";
+    $target_file = $target_dir . $id . ".png";
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 }
 ?>
@@ -178,32 +159,32 @@ function uploadImage($email)
                         <div class="label">
                             <p>
                                 <label><b>Name</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="name" placeholder="Your Name" required>
+                                <input class="w3-input w3-round w3-border" type="text" name="name" id="name" placeholder="Your Name" required>
 
                             </p>
 
                             <p>
                                 <label><b>Email</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="email" placeholder="Your Email Address" required>
+                                <input class="w3-input w3-round w3-border" type="text" name="email" id="email" placeholder="Your Email Address" required>
                             </p>
 
                             <p>
                                 <label><b>Password</b></label>
                             <div class="input-icon">
 
-                                <input class="w3-input w3-round w3-border" type="password" name="password" id="Mypassword" placeholder="Your Password" id="password" required>
-                                <input class="w3-btn w3-round w3-border" type="checkbox" name="password" id="password" value="pass" onclick="showPass()" required>
+                                <input class="w3-input w3-round w3-border" type="password" name="password" id="Mypassword" placeholder="Your Password" required>
+                                <input class="w3-btn w3-round w3-border" type="checkbox" name="password" id="password" value="pass" onclick="showPass()">
                                 <label for="password">Show Password</label>
 
                             </div>
                             </p>
-                           
+
 
                             <p>
                                 <label><b>Re-enter Password</b></label>
                             <div class="input-icon">
 
-                                <input class="w3-input w3-round w3-border" type="password" name="repassword" id="Mypassword" placeholder="Enter Again your Password" id="password" required>
+                                <input class="w3-input w3-round w3-border" type="password" name="repassword" id="repassword" placeholder="Enter Again your Password" onChange="isMatch()" required>
 
                             </div>
                             </p>
@@ -221,17 +202,17 @@ function uploadImage($email)
 
                             <p>
                                 <label><b>Phone</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="phone" placeholder="Your Phone No." required>
+                                <input class="w3-input w3-round w3-border" type="text" name="phone" id="phone" placeholder="Your Phone No." required>
                             </p>
 
                             <p>
                                 <label><b>Address</b></label>
-                                <input class="w3-input w3-round w3-border" type="text" name="address" placeholder="Your Home Address" required>
+                                <input class="w3-input w3-round w3-border" type="text" name="address" id="address" placeholder="Your Home Address" required>
                             </p>
                             <br>
                             <div class="row">
                                 <p style="text-align: center;">
-                                    <input class="w3-btn w3-red w3-round w3-padding-20" type="submit" name="register" value="Register">
+                                    <input class="w3-btn w3-red w3-round w3-padding-20" type="submit" name="register" id="register" value="Register" onclick="return disableButton()">
                                 </p>
                             </div>
                         </div>

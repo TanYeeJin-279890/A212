@@ -8,11 +8,11 @@ if (isset($_POST['signin'])) {
     $stmt = $conn->prepare($sqllogin);
     $stmt->execute();
     $number_of_rows = $stmt->fetchColumn();
-    
+
     if ($number_of_rows  > 0) {
         session_start();
         $_SESSION["sessionid"] = session_id();
-        $_SESSION["email"] = $email ;
+        $_SESSION["email"] = $email;
         echo "<script>alert('Login Success');</script>";
         echo "<script> window.location.replace('dashboard.php')</script>";
     } else {
@@ -36,9 +36,34 @@ if (isset($_POST['signin'])) {
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: lightblue;
+        }
+
+        .bg {
+            background-image: url("tutor.png");
+            background-color: lightcyan;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @media screen and (max-width: 800px) {
+            img {
+                display:none;
+            }
+        }
+
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
         @media screen and (max-width: 600px) {
-            div.image {
-                display: none;
+            .column {
+                flex: 100%;
+                max-width: 100%;
             }
         }
     </style>
@@ -47,53 +72,55 @@ if (isset($_POST['signin'])) {
 
 
 <!--cookies = Without cookies, you’d have to login again after you leave a site or rebuild your shopping cart if you accidentally close the page. -->
+
 <body onload="loadCookies()">
-    <header class="w3-header w3-red w3-center w3-padding-24">
+    <header class="w3-header w3-red w3-center w3-padding">
         <h2><b>My Tutor Websites</b></h2>
     </header>
+    <div class="bg">
+        <div class=" w3-container w3-padding-64 w3-margin">
+            <div class="w3-card w3-left w3-padding w3-margin-32" style="width: 1000px;margin:auto;text-align:left;">
+                <div style="text-align: center;">
+                    <h2 style="color:Tomato; font-size:50px;"><b>Login Form</b></h2>
+                </div><br>
+                <form name="loginForm" action="login.php" method="post">
+                    <p style="text-align:left;font-size: 25px ">
+                        <label style="color:Tomato;"><b>Email</b></label>
+                        <input class="w3-input w3-round w3-border" type="email" name="email" id="idemail" placeholder="Your email" required>
+                    </p>
+                    <p style="text-align:left;font-size: 25px ">
+                        <label style="color:Tomato;"><b>Password</b></label>
+                        <input class="w3-input w3-round w3-border" type="password" name="password" id="idpass" placeholder="Your password" required>
+                    </p>
+                    <p style="text-align:left;">
+                        <input class="w3-check" name="rememberme" type="checkbox" id="idremember" onclick="rememberMe()">
+                        <label>Remember Me</label>
+                    </p>
+                    <p style="text-align:center;font-size: 25px ">
+                        <input type="button" class="w3-btn w3-red" name=" signin" value="Sign In">
+                    </p>
 
+                    <div style=color:blue;><a href="php/register1.php">Not yet registered? Click Me!</a></div>
 
-
-    <!-- Left Column -->
-    <div class="w3-third">
-        <div class="image">
-            <div class="w3-display-container ">
-                <img src="Capture.PNG" alt="Person" style="max-width: 100%; height:auto;">
+                </form>
             </div>
         </div>
     </div>
-    <!--End left content-->
 
-    <div class="w3-twothird">
-        <div class="right w3-container w3-card w3-padding-32 w3-margin"
-            style="width: 600px;margin:auto;text-align:left;">
-            <div style="text-align: center;">
-                <h3 style="color:Tomato;"><b>Login Form</b></h3>
-            </div>
-            <form name="loginForm" action="login.php" method="post">
-            <p>
-                <label><b>Email</b></label>
-                <input class="w3-input w3-round w3-border" type="email" name="email" id="idemail"
-                    placeholder="Your email" required>
-            </p>
-            <p>
-                <label><b>Password</b></label>
-                <input class="w3-input w3-round w3-border" type="password" name="password" id="idpass"
-                    placeholder="Your password" required>
-            </p>
-            <p>
-                <input class="w3-check" name="rememberme" type="checkbox" id="idremember" onclick="rememberMe()">
-                <label>Remember Me</label>
-            </p>
-            <p>
-                <input type="button" class="w3-btn w3-red" name="signin" value="Sign Up">
-            </p>
+    <div class="column">
+        <img src="tutor2.png" style="width:30%">
+    
 
-            <div><a href="php/register1.php">Not yet registered? Click Me!</a></div>
-            
-            </form>
-        </div>
-    </div>
+    <div class="w3-container w3-right" style="font-size:30px; font-weight:bold; font-style:italic;">
+        <pre style="color:green;">Wanted to learn new things to make life fulfill?
+Wanted to find a 1 to 1 tutor lesson?
+Wanted to increase your grades?
+Wanted to explore more that just only learned in schools?
+</pre>
+        <p style="color:tomato;"><b>Welcome to My Tutor Websites</b></p>
+    </div></div>
+
+    <footer class="w3-footer w3-center w3-bottom w3-red">@copyright Jean</footer>
 
 </body>
 
