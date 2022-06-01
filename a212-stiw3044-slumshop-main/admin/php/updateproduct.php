@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $prodcutPrice = $_POST['productprice'];
     $productBarcode = $_POST['productbarcode'];
     $productType = $_POST['producttype'];
-    $sqlupdate = "UPDATE `tbl_products` SET `product_name`='$productName',`product_desc`='$productDesc',
+    $sqlupdate = "UPDATE `tbl_product` SET `product_name`='$productName',`product_desc`='$productDesc',
     `product_type`='$productType',`product_qty`=$productQty,`product_price`=$prodcutPrice,`product_barcode`='$productBarcode' 
     WHERE `product_id` = '$prid'";
     try {
@@ -45,7 +45,7 @@ if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];
     if ($operation == 'details') {
         $prid = $_GET['prid'];
-        $sqlproduct = "SELECT * FROM tbl_products WHERE product_id = '$prid'";
+        $sqlproduct = "SELECT * FROM tbl_product WHERE product_id = '$prid'";
         $stmt = $conn->prepare($sqlproduct);
         $stmt->execute();
         $rows = $stmt->fetchAll();

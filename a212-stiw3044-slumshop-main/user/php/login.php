@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     include 'dbconnect.php';
     $email = $_POST['email'];
     $pass = sha1($_POST['password']);
-    $sqllogin = "SELECT * FROM tbl_admin WHERE admin_email = '$email' AND admin_pass = '$pass'";
+    $sqllogin = "SELECT * FROM tbl_customer WHERE cust_email = '$email' AND cust_password = '$pass'";
     $stmt = $conn->prepare($sqllogin);
     $stmt->execute();
     $number_of_rows = $stmt->fetchColumn();
@@ -30,14 +30,14 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="../js/login.js" defer></script>
 </head>
 
 <body onload="loadCookies()">
     <header class="w3-header w3-yellow w3-center w3-padding-32">
-        <h3>SLumShop Admin</h3>
+        <h3>SLumShop</h3>
         <p>Login Page</p>
     </header>
     <div style="display:flex; justify-content: center">

@@ -40,22 +40,14 @@ if (isset($_POST['signin'])) {
             height: 100%;
             margin: 0;
             padding: 0;
-            background-color: lightblue;
+            background-color: white;
         }
 
         .bg {
-            background-image: url("tutor.png");
-            background-color: lightcyan;
+            background-color: white;
             height: 100%;
             background-position: center;
-            background-repeat: no-repeat;
             background-size: cover;
-        }
-
-        @media screen and (max-width: 800px) {
-            .bg {
-                display:none;
-            }
         }
 
 
@@ -75,11 +67,11 @@ if (isset($_POST['signin'])) {
 
 <body onload="loadCookies()">
     <header class="w3-header w3-red w3-center w3-padding">
-        <h2><b>My Tutor Websites</b></h2>
+        <h2><b>My Tutor Websites(JomStudy)</b></h2>
     </header>
     <div class="bg">
-        <div class=" w3-container w3-padding-64 w3-margin">
-            <div class="w3-card w3-left w3-padding w3-margin-32" style="width: 1000px;margin:auto;text-align:left;">
+        <div class="w3-center w3-container w3-padding-64 w3-margin">
+            <div class="w3-center w3-card w3-left w3-padding w3-margin-32" style="width: 1000px;margin:auto;text-align:center;">
                 <div style="text-align: center;">
                     <h2 style="color:Tomato; font-size:50px;"><b>Login Form</b></h2>
                 </div><br>
@@ -100,27 +92,12 @@ if (isset($_POST['signin'])) {
                         <input type="button" class="w3-btn w3-red" name=" signin" value="Sign In">
                     </p>
 
-                    <div style=color:blue;><a href="php/register1.php">Not yet registered? Click Me!</a></div>
+                    <div style=color:blue;><a href="register1.php">Not yet registered? Click Me!</a></div>
 
                 </form>
             </div>
         </div>
     </div>
-
-    <div class="column">
-        <img src="tutor2.png" style="width:30%">
-    
-
-    <div class="w3-container w3-right" style="font-size:30px; font-weight:bold; font-style:italic;">
-        <pre style="color:green;">Wanted to learn new things to make life fulfill?
-Wanted to find a 1 to 1 tutor lesson?
-Wanted to increase your grades?
-Wanted to explore more that just only learned in schools?
-</pre>
-        <p style="color:tomato;"><b>Welcome to My Tutor Websites</b></p>
-    </div></div>
-
-    <footer class="w3-footer w3-center w3-bottom w3-red">@copyright Jean</footer>
 
 </body>
 

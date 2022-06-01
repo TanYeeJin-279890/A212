@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $productBarcode = $_POST['productbarcode'];
     $productType = $_POST['producttype'];
     $status = "available";
-    $sqlinsertproduct = "INSERT INTO `tbl_products`(`product_name`, `product_type`,`product_desc`, 
+    $sqlinsertproduct = "INSERT INTO `tbl_product`(`product_name`, `product_type`,`product_desc`, 
     `product_qty`, `product_price`, `product_barcode`, `product_status`) VALUES 
     ('$productName','$productType','$prouctDesc',$productQty,$prodcutPrice,'$productBarcode','$status')";
     try {
