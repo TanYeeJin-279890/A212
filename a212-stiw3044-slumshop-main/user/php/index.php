@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 include_once("dbconnect.php");
 if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];

@@ -1,3 +1,4 @@
+//registration page
 function previewFile() {
     const preview = document.querySelector('.imgselection');
     const file = document.querySelector('input[type=file]').files[0];
@@ -18,33 +19,6 @@ function confirmDialog() {
         return true;
     } else {
         return false;
-    }
-}
-
-function rememberMe() {
-    var email = document.forms["loginForm"]["idemail"].value;
-    var pass = document.forms["loginForm"]["idpass"].value;
-    var rememberme = document.forms["loginForm"]["idremember"].checked;
-    //console.log("Form data:" + rememberme + "," + email + "," + pass);
-    if (!rememberme) {
-        setCookies("cemail", "", 0);
-        setCookies("cpass", "", 0);
-        setCookies("crem", false, 0);
-        document.forms["loginForm"]["idemail"].value = "";
-        document.forms["loginForm"]["idpass"].value = "";
-        document.forms["loginForm"]["idremember"].checked = false;
-        alert("Credentials removed");
-    } else {
-        if (email == "" || pass == "") {
-            document.forms["loginForm"]["idremember"].checked = false;
-            alert("Please enter your credentials");
-            return false;
-        } else {
-            setCookies("cemail", email, 30);
-            setCookies("cpass", pass, 30);
-            setCookies("crem", rememberme, 30);
-            alert("Credentials Stored Success");
-        }
     }
 }
 
@@ -109,21 +83,6 @@ function isMatch() {
     }
 }
 
-// function isEmpty() {
-//     var password = document.getElementById("Mypassword").value;
-//     var repass = document.getElementById("repassword").value;
-//     var name = document.getElementById("name").value;
-//     var email = document.getElementById("email").value;
-//     var phone = document.getElementById("phone").value;
-//     var add = document.getElementById("address").value;
-//     if (!(password || repass||name||email||phone||add)) {
-//         alert("Please fill in all required information");
-//         document.getElementById("register").disabled = true;
-//     } else {
-//         document.getElementById("register").disabled = false;
-//     }
-// }
-
 function disableButton() {
     const button = document.getElementById("register")
     if(!isMatch()) {
@@ -133,6 +92,7 @@ function disableButton() {
     }
   }
 
+//course page
 function w3_open() {
     document.getElementById("mySidebar").style.width = "100%";
     document.getElementById("mySidebar").style.display = "block";
@@ -140,4 +100,32 @@ function w3_open() {
 
 function w3_close(){
         document.getElementById("mySidebar").style.display = "none";
+}
+
+//login page
+function rememberMe() {
+    var email = document.forms["loginForm"]["idemail"].value;
+    var pass = document.forms["loginForm"]["idpass"].value;
+    var rememberme = document.forms["loginForm"]["idremember"].checked;
+    //console.log("Form data:" + rememberme + "," + email + "," + pass);
+    if (!rememberme) {
+        setCookies("cemail", "", 0);
+        setCookies("cpass", "", 0);
+        setCookies("crem", false, 0);
+        document.forms["loginForm"]["idemail"].value = "";
+        document.forms["loginForm"]["idpass"].value = "";
+        document.forms["loginForm"]["idremember"].checked = false;
+        alert("Credentials removed");
+    } else {
+        if (email == "" || pass == "") {
+            document.forms["loginForm"]["idremember"].checked = false;
+            alert("Please enter your credentials");
+            return false;
+        } else {
+            setCookies("cemail", email, 30);
+            setCookies("cpass", pass, 30);
+            setCookies("crem", rememberme, 30);
+            alert("Credentials Stored Success");
+        }
+    }
 }
