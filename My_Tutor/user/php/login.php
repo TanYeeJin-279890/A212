@@ -3,7 +3,7 @@
 if (isset($_POST['submit'])) {
     include 'dbconnect.php';
     $email = $_POST['email'];
-    $pass = sha1($_POST['password']);
+    $pass = $_POST['password'];
     $sqllogin = "SELECT * FROM tbl_register WHERE user_email = '$email' AND user_password = '$pass'";
     $stmt = $conn->prepare($sqllogin);
     $stmt->execute();
@@ -22,9 +22,10 @@ if (isset($_POST['submit'])) {
         $_SESSION["name"] = $name;
         $_SESSION["phone"] = $phone;
         echo "<script>alert('Login Success');</script>";
-        echo "<script> window.location.replace('index.php')</script>";
+        echo "<script> window.location.replace('basic.php')</script>";
     } else {
         echo "<script>alert('Login Failed');</script>";
+        echo "<script>alert('Please do register if you are new user');</script>";
         echo "<script> window.location.replace('login.php')</script>";
     }
 }
@@ -161,9 +162,11 @@ if (isset($_POST['submit'])) {
                             <input class="w3-check" name="rememberme" type="checkbox" id="idremember" onclick="rememberMe()">
                             <label>Remember Me</label>
                         </p>
-                        <p style="text-align:center;font-size: 25px; padding-left: 64px;padding-right: 64px;">
-                            <input type="button" class="w3-btn w3-red" style="border-radius: 10px;" type="submit" name="submit" id="submit" value="Sign In">
-                        </p>
+                        <div class="row">
+                                <p style="text-align: center;padding-left: 64px;padding-right: 64px;">
+                                    <input class="w3-btn w3-red w3-round w3-padding-20" type="submit" name="submit" id="login" value="Login">
+                                </p>
+                        </div>
 
                         <div style=color:blue;><a href="php/register1.php">Not yet registered? Click Me!</a></div>
 

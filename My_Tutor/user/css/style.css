@@ -50,16 +50,25 @@
 }
 
 .w3-card-4 {
+    color:black;
+    border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: auto;
     max-height: auto;
     margin: 6px;
     text-align: justify;
     font-family: arial;
+    cursor: pointer;
+}
+
+.w3-card-4:hover{
+    color:purple;
+    outline-style: solid;
 }
 
 .pagination {
     display: inline-block;
+    cursor: pointer;
 }
 
 .pagination a {
@@ -67,12 +76,6 @@
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-}
-
-.pagination a.active {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
 }
 
 .pagination a:hover:not(.active) {

@@ -21,7 +21,7 @@ function rememberMe() {
             setCookies("cemail", email, 30);
             setCookies("cpass", pass, 30);
             setCookies("crem", rememberme, 30);
-            alert("Credentials Stored Success");
+            alert("Credentials Stored");
         }
     }
 }

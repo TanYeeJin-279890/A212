@@ -67,9 +67,12 @@ function truncate($string, $length, $dots = "...")
     </div>
 
     <div class="w3-red">
-        <div>
-            <button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button>
-            <h3>Awesome Tutors</h3>
+        <div class="w3-row">
+            <div class="w3-col" style="width:50px"><button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button></div>
+            <div class="w3-col w3-center" style="width:250px">
+                <h3><b>Awesome Tutors</b></h3>
+            </div>
+            <div class="w3-rest"><a href="login.php" class="w3-right"><i class="fa fa-user" style="font-size:32px;padding:10px;"></i></a></div>
         </div>
 
     </div>
@@ -98,11 +101,11 @@ function truncate($string, $length, $dots = "...")
             echo "<a href='tutor.php?tutor_id=$tutorid' style='text-decoration: none;'> 
             <div class='w3-card-4 w3-round' style='text-align:justify'>";
             echo "<img class='w3-image' src=../assets/tutors/$tutorid.jpg"
-                . " style='width:100%;height:300px;'><hr>";
+                . " style='width:100%;height:auto;'><hr>";
             echo "<div class='w3-container'>
-            <p><b>Name:</b><br> $tutorsname<br>
-            <b>Phone No.:</b><br> $tutorsphone<br>
-            <b>Email:</b><br> $tutorsemail<br>
+            <p><i class='fa fa-user' style='color:purple;padding-right:16px'></i><b>Name:</b><br> $tutorsname<br>
+            <b><i class='fa fa-phone' style='color:purple;padding-right:16px'></i>Phone No.:</b><br> $tutorsphone<br>
+            <b><i class='fa fa-envelope' style='color:purple;padding-right:16px'></i>Email:</b><br> $tutorsemail<br>
             <p><b>Descriptions:</b><br> $tutorsdesc<br>
             </p></p>
             </div></div></a>";
@@ -123,8 +126,12 @@ function truncate($string, $length, $dots = "...")
     }
     echo "<div class='pagination'>";
     for ($page = 1; $page <= $number_of_page; $page++) {
-        echo '<a href = "index.php?pageno=' . $page . '"
-        id="page" style="text-decoration: none" onclick="pageFunc()">&nbsp&nbsp' . $page . ' </a>';
+        if ($page<2 && $page>=1) {
+            echo '<a href = "index.php?pageno=' . $page . '"</a>';
+        }else{
+            echo '<a href = "index.php?pageno=' . $page . '"
+            id="page" style="text-decoration: none">&nbsp&nbsp' . $page . ' </a>';
+        }
     }
     echo "</div>";
     ?>

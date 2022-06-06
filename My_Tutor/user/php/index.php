@@ -8,7 +8,7 @@ if (isset($_SESSION['sessionid'])) {
     //$carttotal = 0;
 } else {
     $user_email = "guest@slumberjer.com";
-   // $carttotal = 0;
+    // $carttotal = 0;
 }
 
 include_once("dbconnect.php");
@@ -16,10 +16,8 @@ if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];
     if ($operation == 'search') {
         $search = $_GET['search'];
-        $option = $_GET['option'];
-        if ($option == "Select") {
-            $sqlcourse = "SELECT * FROM tbl_subjects WHERE subjects_name LIKE '%$search%'";
-        }
+        $sqlsubject = "SELECT * FROM tbl_subjects WHERE subject_name LIKE '%$search%'";
+        
     }
 } else {
     $sqlsubject = "SELECT * FROM tbl_subjects";
@@ -82,37 +80,23 @@ function truncate($string, $length, $dots = "...")
     </div>
 
     <div class="w3-red">
-        <div>
-            <button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button>
-
-            <h3>Courses Provided</h3>
-
-            <div class="w3-container w3-right">
-                <a href="login.php" class="w3-icon fa-fa-user"></a>
-
+        <div class="w3-row">
+            <div class="w3-col" style="width:50px"><button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button></div>
+            <div class="w3-col w3-center" style="width:250px">
+                <h3><b>Interesting Courses</b></h3>
             </div>
+            <div class="w3-rest"><a href="login.php" class="w3-right"><i class="fa fa-user" style="font-size:32px;padding:10px;"></i></a></div>
         </div>
 
     </div>
     <div class="w3-card w3-container w3-padding w3-margin w3-round">
         <h3>Course Search</h3>
         <form>
-            <div class="w3-row">
-                <div class="w3-half" style="padding-right:4px">
-                    <p><input class="w3-input w3-block w3-round w3-border" type="search" name="search" placeholder="Enter search term" /></p>
-                </div>
-
-                <!-- I would like to have a filter to filter out the price and ratings -->
-                <div class="w3-half" style="padding-right:4px">
-                    <p> <select class="w3-input w3-block w3-round w3-border" name="option">
-
-                        </select>
-                    </p>
-                </div>
+            <div style="padding-right:4px">
+                <p><input class="w3-input w3-block w3-round w3-border" type="search" name="search" placeholder="Enter search term" /></p>
             </div>
             <button class="w3-button w3-red w3-round w3-right" type="submit" name="submit" value="search">search</button>
         </form>
-
     </div>
     <div class="w3-grid-template w3-center">
         <?php
@@ -130,32 +114,39 @@ function truncate($string, $length, $dots = "...")
             <header class='w3-container w3-red'><h4><b>$subname</b></h4></header>";
             echo "<img class='w3-image' src=../assets/courses/$subid.png"
                 . " style='width:100%;height:250px'><hr>";
-            // create more design on rating parts
-            echo "<div class='w3-container'><p>Desc: $subdesc<br>Price: RM $subprice<br>Session: $subsess<br>Ratings:$subrate</p></div>
+            echo "<div class='w3-container'>
+            <p><b>Desc:</b> $subdesc<br>
+            <b>Price: RM $subprice<br></b>
+            <b>Session:</b> $subsess<br>
+            <b>Ratings:</b>$subrate</p></div>
             </div></a>";
         }
         ?>
     </div>
     <br>
-
-    <!-- wanted to have more fancy design for pagination -->
-    <?php
-    $num = 1;
-    if ($pageno == 1) {
+    <div class="w3-center">
+        <?php
         $num = 1;
-    } else if ($pageno == 2) {
-        $num = ($num) + 10;
-    } else {
-        $num = $pageno * 10 - 9;
-    }
-    echo "<div class='pagination'>";
-    for ($page = 1; $page <= $number_of_page; $page++) {
-        echo '<a href = "index.php?pageno=' . $page . '"
-        id="page" style="text-decoration: none" onclick="pageFunc()">&nbsp&nbsp' . $page . ' </a>';
-    }
-    echo "</div>";
-    ?>
-
+        if ($pageno == 1) {
+            $num = 1;
+        } else if ($pageno == 2) {
+            $num = ($num) + 10;
+        } else {
+            $num = $pageno * 10 - 9;
+        }
+        echo "<div class='pagination'>";
+        for ($page = 1; $page <= $number_of_page; $page++) {
+           if($page==$pageno){
+            echo '<a href = "index.php?pageno=' . $page . '"
+            id="page" style="color: red;background-color:LavenderBlush;">&nbsp&nbsp' . $page . ' </a>';
+           }else{
+            echo '<a href = "index.php?pageno=' . $page . '"
+            id="page" style="color: black;">&nbsp&nbsp' . $page . ' </a>';
+           }
+        }
+        echo "</div>";
+        ?>
+    </div>
 
     <div class="w3-container w3-row" style="width:40px;height:50px;"></div>
 

@@ -35,25 +35,20 @@ function isMatch() {
 
 function disableButton() {
     const button = document.getElementById("register")
-    if(!isMatch()) {
+    if (!isMatch()) {
         button.disabled = true;
-    }else{
+    } else {
         button.disabled = false;
     }
-  }
+}
 
 //index page
 function w3_open() {
     document.getElementById("mySidebar").style.width = "100%";
     document.getElementById("mySidebar").style.display = "block";
-}
+  }
 
-function w3_close(){
-        document.getElementById("mySidebar").style.display = "none";
-}
-
-function pageFunc(){
-    document.getElementById("page").body.style.color = "pink";
-    return false;    
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
 }
 
