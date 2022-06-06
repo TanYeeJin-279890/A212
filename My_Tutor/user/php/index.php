@@ -115,10 +115,10 @@ function truncate($string, $length, $dots = "...")
             echo "<img class='w3-image' src=../assets/courses/$subid.png"
                 . " style='width:100%;height:250px'><hr>";
             echo "<div class='w3-container'>
-            <p><b>Desc:</b> $subdesc<br>
-            <b>Price: RM $subprice<br></b>
-            <b>Session:</b> $subsess<br>
-            <b>Ratings:</b>$subrate</p></div>
+            <p style='font-size:16px'><b>Desc:</b> $subdesc<br>
+            <b style='font-size:20px'>Price: RM $subprice<br></b>
+            <b>Session:</b>     $subsess<br>
+            <b>Ratings:</b>      $subrate</p></div>
             </div></a>";
         }
         ?>
