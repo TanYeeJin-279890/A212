@@ -1,13 +1,27 @@
+/* css for index.php */
+
 .w3-grid-template {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .w3-grid-template {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
     }
+
+    .resimg {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .w3-grid-template {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .resimg {
         width: 70%;
     }
@@ -16,20 +30,11 @@
 @media screen and (max-width: 800px) {
     .w3-grid-template {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .resimg {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .w3-grid-template {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+
     .resimg {
-        width: 100%;
+        width: 70%;
     }
 }
 
@@ -38,7 +43,39 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
     }
+
     .resimg {
-        width: 100%;
+        width: 70%;
     }
+}
+
+.w3-card-4 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: auto;
+    max-height: auto;
+    margin: 6px;
+    text-align: justify;
+    font-family: arial;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
 }

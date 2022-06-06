@@ -1,4 +1,16 @@
 <?php
+
+session_start();
+if (isset($_SESSION['sessionid'])) {
+    $user_email = $_SESSION['email'];
+    $user_name = $_SESSION['name'];
+    $user_phone = $_SESSION['phone'];
+    //$carttotal = 0;
+} else {
+    $user_email = "guest@slumberjer.com";
+   // $carttotal = 0;
+}
+
 include_once("dbconnect.php");
 if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];
@@ -52,7 +64,7 @@ function truncate($string, $length, $dots = "...")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../js/function.js" defer></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Courses MainPage</title>
 
 </head>
@@ -61,7 +73,7 @@ function truncate($string, $length, $dots = "...")
     <!-- Sidebar -->
     <div class="w3-sidebar w3-bar-block" style="display:none" id="mySidebar">
         <button onclick="w3_close()" class="w3-bar-item w3-button w3-large">Close &times;</button>
-        <a href="course.php" class="w3-bar-item w3-button">Courses</a>
+        <a href="index.php" class="w3-bar-item w3-button">Courses</a>
         <a href="tutor.php" class="w3-bar-item w3-button">Tutors</a>
         <a href="#" class="w3-bar-item w3-button">My Profile</a>
         <a href="#" class="w3-bar-item w3-button">My Subscription</a>
@@ -69,11 +81,18 @@ function truncate($string, $length, $dots = "...")
 
     </div>
 
-    <div class="w3-yellow">
-        <button class="w3-button w3-yellow w3-xlarge" onclick="w3_open()">☰</button>
-        <div class="w3-container">
+    <div class="w3-red">
+        <div>
+            <button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button>
+
             <h3>Courses Provided</h3>
+
+            <div class="w3-container w3-right">
+                <a href="login.php" class="w3-icon fa-fa-user"></a>
+
+            </div>
         </div>
+
     </div>
     <div class="w3-card w3-container w3-padding w3-margin w3-round">
         <h3>Course Search</h3>
@@ -86,39 +105,29 @@ function truncate($string, $length, $dots = "...")
                 <!-- I would like to have a filter to filter out the price and ratings -->
                 <div class="w3-half" style="padding-right:4px">
                     <p> <select class="w3-input w3-block w3-round w3-border" name="option">
-                            <option value="Select" selected>Select</option>
-                            <option value="Bread">Bread</option>
-                            <option value="Beverage">Beverage</option>
-                            <option value="Condiment">Condiment</option>
-                            <option value="Care Product">Care Product</option>
-                            <option value="Canned Food">Canned Food</option>
-                            <option value="Dairy">Dairy</option>
-                            <option value="Dried Food">Dried Food</option>
-                            <option value="Meat">Meat</option>
-                            <option value="Snack">Snack</option>
-                            <option value="Household">Household</option>F
+
                         </select>
                     </p>
                 </div>
             </div>
-            <button class="w3-button w3-yellow w3-round w3-right" type="submit" name="submit" value="search">search</button>
+            <button class="w3-button w3-red w3-round w3-right" type="submit" name="submit" value="search">search</button>
         </form>
 
     </div>
-    <div class="w3-grid-template">
+    <div class="w3-grid-template w3-center">
         <?php
         $i = 0;
         foreach ($rows as $subjects) {
             $i++;
             $subid = $subjects['subject_id'];
             $tutorid = $subjects['tutor_id'];
-            $subname = truncate($subjects['subject_name'], 15);
-            $subdesc = $subjects['subject_description'];
+            $subname = truncate($subjects['subject_name'], 16);
+            $subdesc = truncate($subjects['subject_description'], 60);
             $subsess = $subjects['subject_sessions'];
             $subprice = number_format((float)$subjects['subject_price'], 2, '.', '');
             $subrate = $subjects['subject_rating'];
-            echo "<a href='tutor.php?tutor_id=$tutorid' style='text-decoration: none;'> <div class='w3-card-4 w3-round' style='margin:4px'>
-            <header class='w3-container w3-blue'><h4><b>$subname</b></h4></header>";
+            echo "<a href='tutor.php?tutor_id=$tutorid' style='text-decoration: none;'> <div class='w3-card-4 w3-round'>
+            <header class='w3-container w3-red'><h4><b>$subname</b></h4></header>";
             echo "<img class='w3-image' src=../assets/courses/$subid.png"
                 . " style='width:100%;height:250px'><hr>";
             // create more design on rating parts
@@ -139,19 +148,18 @@ function truncate($string, $length, $dots = "...")
     } else {
         $num = $pageno * 10 - 9;
     }
-    echo "<div class='w3-container w3-row'>";
-    echo "<center>";
+    echo "<div class='pagination'>";
     for ($page = 1; $page <= $number_of_page; $page++) {
-        echo '<a href = "course.php?pageno=' . $page . '" style=
-            "text-decoration: none">&nbsp&nbsp' . $page . ' </a>';
+        echo '<a href = "index.php?pageno=' . $page . '"
+        id="page" style="text-decoration: none" onclick="pageFunc()">&nbsp&nbsp' . $page . ' </a>';
     }
-    echo " ( " . $pageno . " )";
-    echo "</center>";
     echo "</div>";
     ?>
-    <br>
 
-    <footer class="w3-footer w3-center w3-bottom w3-yellow">My Tutor</footer>
+
+    <div class="w3-container w3-row" style="width:40px;height:50px;"></div>
+
+    <footer class="w3-footer w3-center w3-bottom w3-red">My Tutor</footer>
 
 </body>
 
