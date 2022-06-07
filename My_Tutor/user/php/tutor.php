@@ -88,7 +88,6 @@ function truncate($string, $length, $dots = "...")
     </div>
     <div class="w3-grid-template w3-center">
         <?php
-        //join subject table
         $i = 0;
         foreach ($rows as $tutors) {
             $i++;
@@ -114,7 +113,7 @@ function truncate($string, $length, $dots = "...")
     </div>
     <br>
 
-    <!-- wanted to have more fancy design for pagination -->
+
     <?php
     $num = 1;
     if ($pageno == 1) {

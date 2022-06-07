@@ -12,6 +12,9 @@ if (isset($_SESSION['sessionid'])) {
 }
 
 include_once("dbconnect.php");
+$sqltutor = "SELECT tbl_subjects.subject_id, tbl_subjects.subject_name, tbl_subjects.subject_description,  tbl_subjects.subject_price, tbl_subjects.subject_sessions, tbl_subjects.subject_rating,tbl_tutors.tutor_name, tbl_tutors.tutor_id FROM tbl_subjects 
+INNER JOIN tbl_tutors ON tbl_subjects.tutor_id = tbl_tutors.tutor_id";
+
 if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];
     if ($operation == 'search') {
@@ -33,12 +36,14 @@ if (isset($_GET['pageno'])) {
 }
 
 
-$stmt = $conn->prepare($sqlsubject);
+$stmt = $conn->prepare($sqltutor);
 $stmt->execute();
 $number_of_result = $stmt->rowCount();
 $number_of_page = ceil($number_of_result / $results_per_page);
-$sqlsubject = $sqlsubject . " LIMIT $page_first_result , $results_per_page";
-$stmt = $conn->prepare($sqlsubject);
+$sqltutor = $sqltutor . " LIMIT $page_first_result , $results_per_page";
+
+
+$stmt = $conn->prepare($sqltutor);
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $rows = $stmt->fetchAll();
@@ -105,7 +110,8 @@ function truncate($string, $length, $dots = "...")
             $i++;
             $subid = $subjects['subject_id'];
             $tutorid = $subjects['tutor_id'];
-            $subname = truncate($subjects['subject_name'], 16);
+            $tutorname = truncate($subjects['tutor_name'], 30);
+            $subname = truncate($subjects['subject_name'], 20);
             $subdesc = truncate($subjects['subject_description'], 60);
             $subsess = $subjects['subject_sessions'];
             $subprice = number_format((float)$subjects['subject_price'], 2, '.', '');
@@ -115,6 +121,7 @@ function truncate($string, $length, $dots = "...")
             echo "<img class='w3-image' src=../assets/courses/$subid.png"
                 . " style='width:100%;height:250px'><hr>";
             echo "<div class='w3-container'>
+            <p style='font-size:16px'><b>Tutor:</b> $tutorname<br>
             <p style='font-size:16px'><b>Desc:</b> $subdesc<br>
             <b style='font-size:20px'>Price: RM $subprice<br></b>
             <b>Session:</b>     $subsess<br>
