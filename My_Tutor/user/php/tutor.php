@@ -97,7 +97,7 @@ function truncate($string, $length, $dots = "...")
             $tutorsdesc = truncate($tutors['tutor_description'], 60);
             $tutorsphone = $tutors['tutor_phone'];
 
-            echo "<a href='tutor.php?tutor_id=$tutorid' style='text-decoration: none;'> 
+            echo "<a href='tutor.php?tid=$tutorid' style='text-decoration: none;'> 
             <div class='w3-card-4 w3-round' style='text-align:justify'>";
             echo "<img class='w3-image' src=../assets/tutors/$tutorid.jpg"
                 . " style='width:100%;height:auto;'><hr>";

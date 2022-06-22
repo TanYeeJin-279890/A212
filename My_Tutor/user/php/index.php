@@ -2,28 +2,19 @@
 
 session_start();
 if (isset($_SESSION['sessionid'])) {
-    $user_email = $_SESSION['email'];
-    $user_name = $_SESSION['name'];
-    $user_phone = $_SESSION['phone'];
-    //$carttotal = 0;
-} else {
-    $user_email = "guest@slumberjer.com";
-    // $carttotal = 0;
+    echo "<script>alert('Pls login')</script>";
+
 }
 
 include_once("dbconnect.php");
-$sqltutor = "SELECT tbl_subjects.subject_id, tbl_subjects.subject_name, tbl_subjects.subject_description,  tbl_subjects.subject_price, tbl_subjects.subject_sessions, tbl_subjects.subject_rating,tbl_tutors.tutor_name, tbl_tutors.tutor_id FROM tbl_subjects 
-INNER JOIN tbl_tutors ON tbl_subjects.tutor_id = tbl_tutors.tutor_id";
-
 if (isset($_GET['submit'])) {
     $operation = $_GET['submit'];
     if ($operation == 'search') {
         $search = $_GET['search'];
-        $sqlsubject = "SELECT * FROM tbl_subjects WHERE subject_name LIKE '%$search%'";
-        
+        $sqltutor = "SELECT * FROM tbl_subjects WHERE subject_name LIKE '%$search%'";
     }
 } else {
-    $sqlsubject = "SELECT * FROM tbl_subjects";
+    $sqltutor = "SELECT * FROM tbl_subjects";
 }
 
 $results_per_page = 10;
@@ -34,7 +25,6 @@ if (isset($_GET['pageno'])) {
     $pageno = 1;
     $page_first_result = 0;
 }
-
 
 $stmt = $conn->prepare($sqltutor);
 $stmt->execute();
@@ -48,7 +38,6 @@ $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $rows = $stmt->fetchAll();
 
-$conn = null;
 
 
 function truncate($string, $length, $dots = "...")
@@ -86,7 +75,7 @@ function truncate($string, $length, $dots = "...")
 
     <div class="w3-red">
         <div class="w3-row">
-            <div class="w3-col" style="width:50px"><button class="w3-button w3-red w3-xlarge" onclick="w3_open()">☰</button></div>
+            <div class="w3-col" style="width:50px"><button class="w3-button w3-red w3-xlarge" onclick="w3_open()">&#9776;</button></div>
             <div class="w3-col w3-center" style="width:250px">
                 <h3><b>Interesting Courses</b></h3>
             </div>
@@ -109,27 +98,30 @@ function truncate($string, $length, $dots = "...")
         foreach ($rows as $subjects) {
             $i++;
             $subid = $subjects['subject_id'];
-            $tutorid = $subjects['tutor_id'];
-            $tutorname = truncate($subjects['tutor_name'], 30);
-            $subname = truncate($subjects['subject_name'], 20);
+            $subname = truncate($subjects['subject_name'], 15);
             $subdesc = truncate($subjects['subject_description'], 60);
             $subsess = $subjects['subject_sessions'];
             $subprice = number_format((float)$subjects['subject_price'], 2, '.', '');
             $subrate = $subjects['subject_rating'];
-            echo "<a href='tutor.php?tutor_id=$tutorid' style='text-decoration: none;'> <div class='w3-card-4 w3-round'>
-            <header class='w3-container w3-red'><h4><b>$subname</b></h4></header>";
+
+            echo "<a href='subdetails.php?sid=$subid' style='text-decoration: none;'>
+            <div class='w3-card-4 w3-round'><header class='w3-container w3-red'><h4><b>$subname</b></h4></header>";
             echo "<img class='w3-image' src=../assets/courses/$subid.png"
                 . " style='width:100%;height:250px'><hr>";
             echo "<div class='w3-container'>
-            <p style='font-size:16px'><b>Tutor:</b> $tutorname<br>
             <p style='font-size:16px'><b>Desc:</b> $subdesc<br>
             <b style='font-size:20px'>Price: RM $subprice<br></b>
             <b>Session:</b>     $subsess<br>
-            <b>Ratings:</b>      $subrate</p></div>
-            </div></a>";
+            <b>Ratings:</b>      $subrate</p>
+            </div>
+            
+            </div></a>
+            ";
         }
         ?>
+
     </div>
+    
     <br>
     <div class="w3-center">
         <?php
@@ -143,13 +135,13 @@ function truncate($string, $length, $dots = "...")
         }
         echo "<div class='pagination'>";
         for ($page = 1; $page <= $number_of_page; $page++) {
-           if($page==$pageno){
-            echo '<a href = "index.php?pageno=' . $page . '"
+            if ($page == $pageno) {
+                echo '<a href = "index.php?pageno=' . $page . '"
             id="page" style="color: red;background-color:LavenderBlush;">&nbsp&nbsp' . $page . ' </a>';
-           }else{
-            echo '<a href = "index.php?pageno=' . $page . '"
+            } else {
+                echo '<a href = "index.php?pageno=' . $page . '"
             id="page" style="color: black;">&nbsp&nbsp' . $page . ' </a>';
-           }
+            }
         }
         echo "</div>";
         ?>
