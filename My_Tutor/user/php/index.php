@@ -3,7 +3,6 @@
 session_start();
 if (isset($_SESSION['sessionid'])) {
     echo "<script>alert('Pls login')</script>";
-
 }
 
 include_once("dbconnect.php");
@@ -59,6 +58,27 @@ function truncate($string, $length, $dots = "...")
     <link rel="stylesheet" href="../css/style.css" />
     <title>Courses MainPage</title>
 
+
+    <style>
+        input[type=search] {
+            width: 60px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=search]:focus {
+            width: 100%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -89,7 +109,7 @@ function truncate($string, $length, $dots = "...")
             <div style="padding-right:4px">
                 <p><input class="w3-input w3-block w3-round w3-border" type="search" name="search" placeholder="Enter search term" /></p>
             </div>
-            <button class="w3-button w3-red w3-round w3-right" type="submit" name="submit" value="search">search</button>
+            <button class="w3-button w3-red w3-round w3-left" type="submit" name="submit" value="search">search</button>
         </form>
     </div>
     <div class="w3-grid-template w3-center">
@@ -121,7 +141,7 @@ function truncate($string, $length, $dots = "...")
         ?>
 
     </div>
-    
+
     <br>
     <div class="w3-center">
         <?php
